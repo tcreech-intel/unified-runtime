@@ -35,8 +35,10 @@ if(MSVC)
     # treat warnings as errors
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /WX /W3 /wd4996")
 
-    # enable multi-process compilation
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
+    # enable multi-process compilation if supported
+    if(NOT "${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang|IntelLLVM")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
+    endif()
 endif()
 
 # Allow custom third_party folder
